@@ -36,7 +36,7 @@ function Get-ZDAllTickets {
     Begin {
         Write-Verbose -Message 'Creating parameters from Get-ZDAllTickets'
 
-        $articles = [Collections.arraylist]::new()
+        $Tickets = [Collections.arraylist]::new()
 
         if ($OrgID) {
             $URI = "https://$env:ZDDomain.zendesk.com/api/v2/organizations/$OrgID/tickets.json"
@@ -61,31 +61,27 @@ function Get-ZDAllTickets {
             Headers = $ZDHeaders
         }
 
-        $PageCount = Invoke-RestMethod @params | Select-Object -ExpandProperty page_count
-        #Add all of the pages to a collection
-        $Pages = 1..$PageCount | Foreach-Object {
-            "$($URI)?per_page=100&page=$($_)"
-        }
-
+        $Pages = Get-Pages -URI $URI  
     }
+
     Process
     {
         Write-Verbose -Message 'Invoking Rest Method from Get-ZDAllTickets'
 
         Foreach ($page in $Pages) {
-
         
             $params = @{
                 Uri     = $page
                 Method  = 'Get'
                 Headers = $ZDHeaders
+                ContentType =  "Application/JSON"
             }
 
-            $articles += (Invoke-RestMethod @params).tickets
+            $Tickets += (Invoke-RestMethod  @params).tickets
         }
     }
     End
     {
-        return $articles
+        return $Tickets
     }
 }
