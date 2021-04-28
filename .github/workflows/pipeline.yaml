@@ -1,42 +1,43 @@
 name: "Pipeline"
 
-on: push
-  branches: 
-    - main
+on:
+  push:
+    branches: 
+      - main
 
-jobs:
-  job-main:
-    name: main
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2.3.4
+  jobs:
+    job-main:
+      name: main
+      runs-on: windows-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2.3.4
 
-      - name: Install Dependancies
-        run: |
-          $Modules = @(
-            "InvokeBuild"
-            "PSScriptAnalyzer"
-            "Pester"
-          )
-          Install-Module -Name $Modules -Scope "CurrentUser" -Force -ErrorAction "Stop"
-
-      - name: build
-        run: |
-          $Modules = @(
+        - name: Install Dependancies
+          run: |
+            $Modules = @(
               "InvokeBuild"
               "PSScriptAnalyzer"
               "Pester"
             )
-            Import-Module -Name $Modules -ErrorAction "Stop"
-            Write-Output "This is the build stage"
+            Install-Module -Name $Modules -Scope "CurrentUser" -Force -ErrorAction "Stop"
 
-      - name: test
-        run: |
-          Write-Output "This is the test stage"
+        - name: build
+          run: |
+            $Modules = @(
+                "InvokeBuild"
+                "PSScriptAnalyzer"
+                "Pester"
+              )
+              Import-Module -Name $Modules -ErrorAction "Stop"
+              Write-Output "This is the build stage"
 
-      - name: publish
-        run: |
-          Write-Output "This is the publish stage"
-          Write-Output "Needed to change something"
+        - name: test
+          run: |
+            Write-Output "This is the test stage"
+
+        - name: publish
+          run: |
+            Write-Output "This is the publish stage"
+            Write-Output "Needed to change something"
 
