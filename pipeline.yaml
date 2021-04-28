@@ -1,0 +1,46 @@
+name: "Pipeline"
+
+on:
+  push:
+    branches:
+     -master
+
+jobs:
+  job-main:
+    name: main
+      runs-on: windows-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2.3.4
+
+        - name: Install Dependancies
+          run: |
+            $Modules = @(
+              "InvokeBuild"
+              "PSScriptAnalyzer"
+              "Pester"
+            )
+            Install-Module -Name $Modules -Scope "CurrentUser" -Force -ErrorAction "Stop" -skipversioncheck
+          shell: pwsh
+
+        - name: build
+        run: |
+          $Modules = @(
+              "InvokeBuild"
+              "PSScriptAnalyzer"
+              "Pester"
+            )
+            Import-Module -Name $Modules -ErrorAction "Stop"
+            Write-Output "This is the build stage"
+        shell: pwsh
+
+        - name: test
+          run: |
+          Write-Output "This is the test stage"
+        shell: pwsh
+
+        - name: publish
+          run: |
+          Write-Output "This is the publish stage"
+        shell: pwsh
+
