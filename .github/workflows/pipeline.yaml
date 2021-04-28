@@ -1,9 +1,6 @@
 name: "Pipeline"
 
-on:
-  push:
-    branches:
-     -main
+on: push
 
 jobs:
   job-main:
@@ -21,7 +18,6 @@ jobs:
             "Pester"
           )
           Install-Module -Name $Modules -Scope "CurrentUser" -Force -ErrorAction "Stop" -skipversioncheck
-        shell: pwsh
 
       - name: build
         run: |
@@ -32,16 +28,13 @@ jobs:
             )
             Import-Module -Name $Modules -ErrorAction "Stop"
             Write-Output "This is the build stage"
-        shell: pwsh
 
       - name: test
         run: |
           Write-Output "This is the test stage"
-        shell: pwsh
 
       - name: publish
         run: |
           Write-Output "This is the publish stage"
           Write-Output "Needed to change something"
-        shell: pwsh
 
