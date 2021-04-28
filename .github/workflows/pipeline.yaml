@@ -34,13 +34,13 @@ jobs:
             Write-Output "This is the build stage"
         shell: pwsh
 
-        - name: test
-          run: |
+      - name: test
+        run: |
           Write-Output "This is the test stage"
         shell: pwsh
 
-        - name: publish
-          run: |
+      - name: publish
+        run: |
           Write-Output "This is the publish stage"
         shell: pwsh
 
