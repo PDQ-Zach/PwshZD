@@ -42,5 +42,6 @@ jobs:
       - name: publish
         run: |
           Write-Output "This is the publish stage"
+          Write-Output "Needed to change something"
         shell: pwsh
 
