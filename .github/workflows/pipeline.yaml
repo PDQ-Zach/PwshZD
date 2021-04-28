@@ -24,23 +24,23 @@ jobs:
         shell: pwsh
 
       - name: build
-      run: |
-        $Modules = @(
-            "InvokeBuild"
-            "PSScriptAnalyzer"
-            "Pester"
-          )
-          Import-Module -Name $Modules -ErrorAction "Stop"
-          Write-Output "This is the build stage"
-      shell: pwsh
-
-      - name: test
         run: |
-        Write-Output "This is the test stage"
-      shell: pwsh
+          $Modules = @(
+              "InvokeBuild"
+              "PSScriptAnalyzer"
+              "Pester"
+            )
+            Import-Module -Name $Modules -ErrorAction "Stop"
+            Write-Output "This is the build stage"
+        shell: pwsh
 
-      - name: publish
-        run: |
-        Write-Output "This is the publish stage"
-      shell: pwsh
+        - name: test
+          run: |
+          Write-Output "This is the test stage"
+        shell: pwsh
+
+        - name: publish
+          run: |
+          Write-Output "This is the publish stage"
+        shell: pwsh
 
