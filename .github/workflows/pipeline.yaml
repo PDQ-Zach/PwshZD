@@ -24,7 +24,7 @@ jobs:
 
       - name: Analyze
         run: |
-        Invoke-Build -Task Analyze
+          Invoke-Build -Task Analyze
 
       - name: Test
         run: |
