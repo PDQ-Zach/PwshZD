@@ -13,31 +13,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.4
 
-      - name: Install Dependancies
+      - name: Install InvokeBuild
         run: |
-          $Modules = @(
-            "InvokeBuild"
-            "PSScriptAnalyzer"
-            "Pester"
-          )
-          Install-Module -Name $Modules -Scope "CurrentUser" -Force -ErrorAction "Stop"
+          Write-Output "Installing InvokeBuild"
+          Install-Module -Name InvokeBuild -Scope "CurrentUser" -Force -ErrorAction "Stop"
 
       - name: build
         run: |
-          $Modules = @(
-              "InvokeBuild"
-              "PSScriptAnalyzer"
-              "Pester"
-            )
-            Import-Module -Name $Modules -ErrorAction "Stop"
-            Write-Output "This is the build stage"
+          Invoke-Build -Task Build
+
+      - name: Analyze
+        run: |
+        Invoke-Build -Task Analyze
 
       - name: test
         run: |
-          Write-Output "This is the test stage"
-
-      - name: publish
-        run: |
-          Write-Output "This is the publish stage"
-          Write-Output "Needed to change something"
-
+          Invoke-Build -Task Test
