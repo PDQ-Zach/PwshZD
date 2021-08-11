@@ -1,0 +1,4 @@
+Add tests to validate the filename and function name match
+Add tests to ensure help documentation exists
+Standardize object types
+Ensure objects are being created the same way in each cmdlet
