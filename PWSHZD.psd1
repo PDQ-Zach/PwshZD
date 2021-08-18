@@ -24,7 +24,7 @@ ModuleVersion = '1.0'
 GUID = '93c1811c-5876-4348-8756-2ecd2456c224'
 
 # Author of this module
-Author = 'Josh'
+Author = 'Zach Fegan'
 
 # Company or vendor of this module
 CompanyName = 'Unknown'
